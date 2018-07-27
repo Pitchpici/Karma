@@ -1,14 +1,14 @@
 $(document).ready(function() {
 
+  // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyBR4mFvJiYUIQDIVoDzKCWZyxyeJ-C5rCw",
-    authDomain: "fir-project-ca268.firebaseapp.com",
-    databaseURL: "https://fir-project-ca268.firebaseio.com",
-    projectId: "fir-project-ca268",
+    apiKey: "AIzaSyB6HgirbuLDHC1IAV_mDq4083z1vrfKMhQ",
+    authDomain: "karma-85e36.firebaseapp.com",
+    databaseURL: "https://karma-85e36.firebaseio.com",
+    projectId: "karma-85e36",
     storageBucket: "",
-    messagingSenderId: "60944439745"
+    messagingSenderId: "142741192713"
   };
-
   firebase.initializeApp(config);
 
 
@@ -19,7 +19,7 @@ $(document).ready(function() {
   else {
   
     var uiConfig = {
-       signInSuccessUrl: 'https://joycurthblisso.github.io/GroupProject-1/setuppage.html',
+       signInSuccessUrl: 'https://pitchpici.github.io/Karma/setuppage.html',
        signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID
@@ -35,7 +35,7 @@ $(document).ready(function() {
 
   function goToHome() {
     
-    location.href = "https://joycurthblisso.github.io/GroupProject-1/Angels.html"
+    location.href = "https://pitchpici.github.io/Karma/Angels.html"
    
   };
 });
