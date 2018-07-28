@@ -152,13 +152,14 @@ $(document).ready(function() {
 
               $(this).parents("tr").remove(); //removes row from table
 
-           database.ref("users/" + key + "/profile").update(obj); 
+             // database.ref("users/" + key + "/profile").update(obj); 
 
            } 
+              database.ref("users/" + key + "/profile").update(obj); 
 
-               console.log('outerspace' + emailArray);
+              console.log('outerspace' + emailArray);
 
-               
+
            });// close button happy
 
        // database.ref("users/" + key + "/profile").update(obj); 
