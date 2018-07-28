@@ -54,9 +54,11 @@ $(document).ready(function() {
     event.preventDefault();
 
     var user = firebase.auth().currentUser.uid;
+    var email = firebase.auth().currentUser.email;
  
     var profile = {
       user: user,
+      email: email,
       restaurant: selectedDonor.data('name'),
       restaurantAddress: selectedDonor.data('address')
     };
