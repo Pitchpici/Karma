@@ -115,7 +115,12 @@ $(document).ready(function() {
       event.preventDefault();
 
 
-         var obj = {};
+         var obj = {
+          donateFood: null,
+          menuNumber: null,
+          pickUp: null,
+          value: null
+         };
           
          emailArray = [];      
 
@@ -130,6 +135,7 @@ $(document).ready(function() {
 
              console.log("This is the selected item's key: " + key); //this is the donation unique key
 
+
              database.ref("users/" + userId + "/profile").once('value').then(function(snapshot) {
                 
                var donorEmail = snapshot.val().email;
@@ -141,20 +147,17 @@ $(document).ready(function() {
                return emailArray;
              });
 
-             // console.log("outside array" + email.Array);
 
-
-             obj['users/' + user + '/donations/' + $(this).attr("id")] = null;
               $(this).parents("tr").remove(); //removes row from table
 
-             //grab email address based on the id
+             
 
            } 
 
                console.log('outerspace' + emailArray);
            });// close button happy
 
-       database.ref().update(obj); 
+       database.ref("users/" + key + "/profile").update(obj); 
 
       $("#donation").on("click",function(event) {
           if ($("#filled-in-box").is(":checked")) {
