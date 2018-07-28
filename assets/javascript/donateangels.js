@@ -114,14 +114,6 @@ $(document).ready(function() {
 
       event.preventDefault();
 
-
-         var obj = {
-          donateFood: null,
-          menuNumber: null,
-          pickUp: null,
-          value: null
-         };
-
          var key="";
           
          emailArray = [];      
@@ -155,6 +147,13 @@ $(document).ready(function() {
              // database.ref("users/" + key + "/profile").update(obj); 
 
            } 
+
+        var obj = {
+          donateFood: null,
+          menuNumber: null,
+          pickUp: null,
+          value: null
+        };
               database.ref("users/" + key + "/profile").update(obj); 
 
               console.log('outerspace' + emailArray);
