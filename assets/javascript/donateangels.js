@@ -208,15 +208,15 @@ $(document).ready(function() {
      });
 
 
-  	   database.ref("users/" + userId).on("value", function(childSnapshot) {
+  	   database.ref("users/" + userId).on("value", function(Snapshot) {
     
-        var restaurant = childSnapshot.val().restaurant;
-    		var restaurantAddress = childSnapshot.val().restaurantAddress;
-    		var donateFood = childSnapshot.val().donateFood;
-    		var menuNumber = childSnapshot.val().menuNumber;
-    		var value = childSnapshot.val().value;
-    		var pickUp = childSnapshot.val().pickUp;
-        var userId = childSnapshot.val().user;
+        var restaurant = Snapshot.val().restaurant;
+    		var restaurantAddress = Snapshot.val().restaurantAddress;
+    		var donateFood = Snapshot.val().donateFood;
+    		var menuNumber = Snapshot.val().menuNumber;
+    		var value = Snapshot.val().value;
+    		var pickUp = Snapshot.val().pickUp;
+        var userId = Snapshot.val().user;
 
     		var donationTable = $("#donationTable");
     		donationTable.append("<tr><th>"+ restaurant +"</th><th>" + restaurantAddress +"</th><th>"+ donateFood +"</th><th>"+ menuNumber + "</th><th>"+ pickUp + "</th><th><p><input type='checkbox' class='filled-in happy' id='"+ userId +"'/><label for='"+ userId + "'></label></p></tr>");
