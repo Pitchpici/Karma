@@ -208,9 +208,9 @@ $(document).ready(function() {
      });
 
 
-  	   database.ref("users/" + userId).on("value", function(snapshot) {
+  	   database.ref("users/" + userId + "/profile").on("value", function(snapshot) {
 
-        console.log("snapshot here" + snapshot.val());
+        console.log("snapshot here" + snapshot.val();
 
         console.log(snapshot.val().restaurant);
     
