@@ -24,6 +24,7 @@ $(document).ready(function() {
         if (user) {
           // User is signed in.
           userId = firebase.auth().currentUser.uid;
+          console.log("This is the user id: " + userId);
         } else {
           console.log("No user is signed in");
         }
