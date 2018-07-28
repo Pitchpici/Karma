@@ -19,6 +19,13 @@ $(document).ready(function() {
     var donationTable = $("#donationTable");
 
     var userId;
+    var key;
+
+    var obj = {
+      donateFood: null,
+      value: null, 
+      pickUp: null
+  };
 
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -114,7 +121,6 @@ $(document).ready(function() {
 
       event.preventDefault();
 
-         var key="";
           
          emailArray = [];      
 
@@ -128,7 +134,6 @@ $(document).ready(function() {
              key = $(this).attr("id");
 
              console.log("This is the selected item's key: " + key); //this is the donation unique key
-
 
              database.ref("users/" + userId + "/profile").once('value').then(function(snapshot) {
                 
@@ -144,24 +149,16 @@ $(document).ready(function() {
 
               $(this).parents("tr").remove(); //removes row from table
 
-             // database.ref("users/" + key + "/profile").update(obj); 
+             
 
            } 
 
-        var obj = {
-          donateFood: null,
-          menuNumber: null,
-          pickUp: null,
-          value: null
-        };
-              database.ref("users/" + key + "/profile").update(obj); 
-
-              console.log('outerspace' + emailArray);
-
-
+               console.log('outerspace' + emailArray);
            });// close button happy
 
-       // database.ref("users/" + key + "/profile").update(obj); 
+      console.log("key" + key);   
+
+       database.ref("users/" + key + "/profile").update(obj); 
 
       $("#donation").on("click",function(event) {
           if ($("#filled-in-box").is(":checked")) {
