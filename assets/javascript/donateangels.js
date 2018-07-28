@@ -252,7 +252,8 @@ $(document).ready(function() {
 
       var organization = $("#organization").val().trim();
       var organizationAddress = $("#organization-address").val().trim();
-      var user = firebase.auth().currentUser.uid;
+      var user = firebase.auth().currentUser;
+
 
       var username, useremail, useruid;
 
