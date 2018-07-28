@@ -18,7 +18,7 @@ $(document).ready(function() {
     var database = firebase.database();
     var donationTable = $("#donationTable");
 
-    var userId = firebase.auth().currentUser.uid;
+    var userId;
 
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
