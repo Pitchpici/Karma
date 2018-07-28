@@ -17,7 +17,13 @@ $(document).ready(function() {
 
     var database = firebase.database();
     var donationTable = $("#donationTable");
-    var user = firebase.auth().currentUser.uid;
+
+    var userId = firebase.auth().currentUser.uid;
+
+  return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+  var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+  // ...
+});
 
     console.log("This is the current user: " + user);
 
