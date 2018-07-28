@@ -17,8 +17,8 @@ $(document).ready(function() {
 
     var database = firebase.database();
     var donationTable = $("#donationTable");
-  	// var user = "tkHYANYecOWFQ8JnDmQZsfzVBns1";
-  	// var email = "clarkwmcd@gmail.com";
+  	var user = "tkHYANYecOWFQ8JnDmQZsfzVBns1";
+  	var email = "clarkwmcd@gmail.com";
 
 
     $("#submitBtn").on("click", function(event) {
