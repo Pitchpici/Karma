@@ -17,21 +17,12 @@ $(document).ready(function() {
 
     var database = firebase.database();
     var donationTable = $("#donationTable");
-    var user = firebase.auth().currentUser;
+    // var user = firebase.auth().currentUser;
 
-    console.log("This is the current user: " + user);
+    // console.log("This is the current user: " + user);
 
-    var name, email, photoUrl, uid, emailVerified;
+    console.log(username, useremail, useruid);
 
-      if (user != null) {
-        name = user.displayName;
-        email = user.email;
-        photoUrl = user.photoURL;
-        emailVerified = user.emailVerified;
-        uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-                         // this value to authenticate with your backend server, if
-                         // you have one. Use User.getToken() instead.
-      }
   	// var email = "clarkwmcd@gmail.com";
 
 

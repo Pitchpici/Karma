@@ -172,17 +172,17 @@
       var organizationAddress = $("#organization-address").val().trim();
       var user = firebase.auth().currentUser.uid;
 
-      var name, email, photoUrl, uid, emailVerified;
+      var username, useremail, useruid;
 
     if (user != null) {
-      name = user.displayName;
-      email = user.email;
-      photoUrl = user.photoURL;
-      emailVerified = user.emailVerified;
-      uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+      username = user.displayName;
+      useremail = user.email;
+      useruid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
                        // this value to authenticate with your backend server, if
                        // you have one. Use User.getToken() instead.
     }
+
+    console.log(username, useremail, useruid);
 
       var profile = {
         user: user,
