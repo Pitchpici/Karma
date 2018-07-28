@@ -17,7 +17,9 @@ $(document).ready(function() {
 
     var database = firebase.database();
     var donationTable = $("#donationTable");
-    var user = firebase.auth().currentUser.uid;
+    var user = firebase.auth().currentUser;
+
+    console.log("This is the current user: " + user);
   	// var email = "clarkwmcd@gmail.com";
 
 
