@@ -17,8 +17,8 @@ $(document).ready(function() {
 
     var database = firebase.database();
     var donationTable = $("#donationTable");
-  	var user = "tkHYANYecOWFQ8JnDmQZsfzVBns1";
-  	var email = "clarkwmcd@gmail.com";
+    var user = firebase.auth().currentUser.uid;
+  	// var email = "clarkwmcd@gmail.com";
 
 
     $("#submitBtn").on("click", function(event) {
@@ -93,6 +93,8 @@ $(document).ready(function() {
 
 
   		database.ref("/users/" + user + "/profile").update(temp);
+
+
      
 
     });
