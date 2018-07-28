@@ -172,6 +172,7 @@
 
       var organization = $("#organization").val().trim();
       var organizationAddress = $("#organization-address").val().trim();
+
       var userId = firebase.auth().currentUser.uid;
 
       return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
@@ -190,7 +191,8 @@
 
 
       var profile = {
-        user: user,
+        user: username,
+        email: useremail,
         organization: organization,
         organizationAddress: organizationAddress
       };

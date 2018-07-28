@@ -114,8 +114,52 @@ $(document).ready(function() {
 
       event.preventDefault();
 
+
+         var obj = {};
+          
+         emailArray = [];      
+
+         $(".happy").each(function (index, element) {
+
+
+           if (element.checked) {
+
+             console.log("This is the checked element: " + element);
+
+             var key = $(this).attr("id");
+
+             console.log("This is the selected item's key: " + key); //this is the donation unique key
+
+             database.ref("users/" + userId + "/profile").once('value').then(function(snapshot) {
+                
+               var donorEmail = snapshot.val().email;
+               console.log(donorEmail);
+
+               emailArray.push(donorEmail);
+               console.log(emailArray);
+
+               return emailArray;
+             });
+
+             // console.log("outside array" + email.Array);
+
+
+             obj['users/' + user + '/donations/' + $(this).attr("id")] = null;
+              $(this).parents("tr").remove(); //removes row from table
+
+             //grab email address based on the id
+
+           } 
+
+               console.log('outerspace' + emailArray);
+           });// close button happy
+
+       database.ref().update(obj); 
+
       $("#donation").on("click",function(event) {
           if ($("#filled-in-box").is(":checked")) {
+
+
             
             console.log("Donation ready for pick up!");
             function receiverEmail() {
@@ -225,7 +269,10 @@ $(document).ready(function() {
         var userId = snapshot.val().user;
 
     		var donationTable = $("#donationTable");
-    		donationTable.append("<tr><th>"+ restaurant +"</th><th>" + restaurantAddress +"</th><th>"+ donateFood +"</th><th>"+ menuNumber + "</th><th>"+ pickUp + "</th><th><p><input type='checkbox' class='filled-in happy' id='"+ userId +"'/><label for='"+ userId + "'></label></p></tr>");
+
+    		donationTable.append("<tr><th>"+ restaurant +"</th><th>" + restaurantAddress +"</th><th>"+ donateFood +"</th><th>"+ 
+          menuNumber + "</th><th>"+ pickUp + "</th><th><p><input type='checkbox' class='filled-in happy' id='"+ userId +
+          "'/><label for='"+ userId + "'></label></p></tr>");
 
     	}, function(errorObject) {
     		console.log("The read failed: " + errorObject.code);
