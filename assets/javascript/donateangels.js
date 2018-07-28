@@ -105,8 +105,6 @@ $(document).ready(function() {
   		database.ref("/users/" + userId + "/profile").update(temp);
 
 
-     
-
     });
 
 
@@ -214,7 +212,7 @@ $(document).ready(function() {
      });
 
 
-  	   database.ref("users/" + userId).on("child_added", function(childSnapshot) {
+  	   database.ref("users/" + userId).on("value", function(childSnapshot) {
     
         var restaurant = childSnapshot.val().restaurant;
     		var restaurantAddress = childSnapshot.val().restaurantAddress;
