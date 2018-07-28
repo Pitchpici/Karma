@@ -24,7 +24,8 @@ $(document).ready(function() {
     var obj = {
       donateFood: null,
       value: null, 
-      pickUp: null
+      pickUp: null,
+      menuNumber: null
   };
 
     firebase.auth().onAuthStateChanged(function(user) {
