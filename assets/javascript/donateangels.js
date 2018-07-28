@@ -131,6 +131,8 @@ $(document).ready(function() {
 
              console.log("This is the checked element: " + element);
 
+            $(this).parents("tr").remove();
+
              key = $(this).attr("id");
 
              console.log("This is the selected item's key: " + key); //this is the donation unique key
@@ -145,10 +147,6 @@ $(document).ready(function() {
 
                return emailArray;
              });
-
-
-              $(this).parents("tr").remove(); //removes row from table
-
              
 
            } 
