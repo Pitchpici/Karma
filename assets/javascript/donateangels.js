@@ -121,6 +121,8 @@ $(document).ready(function() {
           pickUp: null,
           value: null
          };
+
+         var key="";
           
          emailArray = [];      
 
@@ -131,10 +133,10 @@ $(document).ready(function() {
 
              console.log("This is the checked element: " + element);
 
-             var key = $(this).attr("id");
+             key = $(this).attr("id");
 
              console.log("This is the selected item's key: " + key); //this is the donation unique key
-              database.ref("users/" + key + "/profile").update(obj); 
+
 
              database.ref("users/" + userId + "/profile").once('value').then(function(snapshot) {
                 
@@ -150,7 +152,7 @@ $(document).ready(function() {
 
               $(this).parents("tr").remove(); //removes row from table
 
-             
+           database.ref("users/" + key + "/profile").update(obj); 
 
            } 
 
