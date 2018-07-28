@@ -220,6 +220,65 @@ $(document).ready(function() {
     		console.log("The read failed: " + errorObject.code);
     	});
 
+//setupoage:
+
+ var organizationForm = $("#organization-form");
+    var restaurantForm = $("#restaurant-form");
+    var buttons = $("#buttongroup");
+    var submit = $("#submit");
+
+    organizationForm.hide();
+    restaurantForm.hide();
+    submit.hide();
+
+    $("#donor").on("click", function(event) {
+      restaurantForm.show();
+      submit.show();
+      organizationForm.hide();
+      buttons.hide();
+    
+    });
+
+    $("#requester").on("click", function(event) {
+      organizationForm.show();
+      submit.show();
+      restaurantForm.hide();
+      buttons.hide();
+   
+    });
+
+    $("#submitOrg").on("click", function(event) {
+      event.preventDefault();
+
+      var organization = $("#organization").val().trim();
+      var organizationAddress = $("#organization-address").val().trim();
+      var user = firebase.auth().currentUser.uid;
+
+      var username, useremail, useruid;
+
+    if (user != null) {
+      username = user.displayName;
+      useremail = user.email;
+      useruid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+                       // this value to authenticate with your backend server, if
+                       // you have one. Use User.getToken() instead.
+    }
+
+    console.log(username, useremail, useruid);
+
+      var profile = {
+        user: user,
+        organization: organization,
+        organizationAddress: organizationAddress
+      };
+
+      firebase.database().ref("/users/" + user + "/profile").set(profile).then(function () {
+        location.href="Angels.html"
+      }); 
+    });
+
+  });
+
 
 });
 
