@@ -108,10 +108,6 @@ $(document).ready(function() {
     });
 
 
-        } else {
-          console.log("No user is signed in");
-        }
-    });    
 
 
     $("#btnHappy").on("click", function(event) {
@@ -229,6 +225,13 @@ $(document).ready(function() {
     		console.log("The read failed: " + errorObject.code);
     	});
 
+               } else {
+          console.log("No user is signed in");
+        }
+    });    
+
+
 
 });
+
 
