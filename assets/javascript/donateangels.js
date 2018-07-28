@@ -23,14 +23,10 @@ $(document).ready(function() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           // User is signed in.
-          return userId = firebase.auth().currentUser.uid;
+          userId = firebase.auth().currentUser.uid;
           console.log("This is the user id: " + userId);
-        } else {
-          console.log("No user is signed in");
-        }
-    });
 
-    console.log("This is the current user: " + userId);
+
 
   	// var email = "clarkwmcd@gmail.com";
 
@@ -112,6 +108,12 @@ $(document).ready(function() {
      
 
     });
+
+
+        } else {
+          console.log("No user is signed in");
+        }
+    });    
 
 
     $("#btnHappy").on("click", function(event) {
