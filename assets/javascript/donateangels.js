@@ -10,20 +10,22 @@ $(document).ready(function() {
     authDomain: "karma-85e36.firebaseapp.com",
     databaseURL: "https://karma-85e36.firebaseio.com",
     projectId: "karma-85e36",
-    storageBucket: "",
+    storageBucket: "karma-85e36.appspot.com",
     messagingSenderId: "142741192713"
   };
   firebase.initializeApp(config);
 
     var database = firebase.database();
     var donationTable = $("#donationTable");
-  	var user = "tkHYANYecOWFQ8JnDmQZsfzVBns1";
-  	var email = "clarkwmcd@gmail.com";
+  	// var user = "tkHYANYecOWFQ8JnDmQZsfzVBns1";
+  	// var email = "clarkwmcd@gmail.com";
 
 
     $("#submitBtn").on("click", function(event) {
 
       event.preventDefault();
+
+      console.log("submit working");
 
       if (($("#donateFood").val() == "") || ($("#menuNumber").val() == "") || ($("#value").val() == "") || ($("#pickUp").val() == "")) {
 
