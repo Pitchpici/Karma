@@ -117,7 +117,7 @@ $(document).ready(function() {
       $("#donation").on("click",function(event) {
           if ($("#filled-in-box").is(":checked")) {
             
-            
+            console.log("Donation ready for pick up!");
             function receiverEmail() {
               var queryURL = "https://api.mailgun.net/v3/";
               var hdrVal = "Basic " + btoa("api:key-ef72536d6301ae8ec42279773af8eaf9");
