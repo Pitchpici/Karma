@@ -262,21 +262,23 @@ $(document).ready(function() {
         console.log("snapshot here" + snapshot.val());
 
         console.log(snapshot.val().restaurant);
+
+        if (snapshot.val().menuNumber == null) {
     
-        var restaurant = snapshot.val().restaurant;
-    		var restaurantAddress = snapshot.val().restaurantAddress;
-    		var donateFood = snapshot.val().donateFood;
-    		var menuNumber = snapshot.val().menuNumber;
-    		var value = snapshot.val().value;
-    		var pickUp = snapshot.val().pickUp;
-        var userId = snapshot.val().user;
+            var restaurant = snapshot.val().restaurant;
+        		var restaurantAddress = snapshot.val().restaurantAddress;
+        		var donateFood = snapshot.val().donateFood;
+        		var menuNumber = snapshot.val().menuNumber;
+        		var value = snapshot.val().value;
+        		var pickUp = snapshot.val().pickUp;
+            var userId = snapshot.val().user;
 
-    		var donationTable = $("#donationTable");
+        		var donationTable = $("#donationTable");
 
-    		donationTable.append("<tr><th>"+ restaurant +"</th><th>" + restaurantAddress +"</th><th>"+ donateFood +"</th><th>"+ 
-          menuNumber + "</th><th>"+ pickUp + "</th><th><p><input type='checkbox' class='filled-in happy' id='"+ userId +
-          "'/><label for='"+ userId + "'></label></p></tr>");
-
+        		donationTable.append("<tr><th>"+ restaurant +"</th><th>" + restaurantAddress +"</th><th>"+ donateFood +"</th><th>"+ 
+              menuNumber + "</th><th>"+ pickUp + "</th><th><p><input type='checkbox' class='filled-in happy' id='"+ userId +
+              "'/><label for='"+ userId + "'></label></p></tr>");
+        }
     	}, function(errorObject) {
     		console.log("The read failed: " + errorObject.code);
     	});
