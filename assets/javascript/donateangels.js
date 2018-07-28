@@ -210,7 +210,9 @@ $(document).ready(function() {
 
   	   database.ref("users/" + userId).on("value", function(snapshot) {
 
-        console.log("snapshot here" + snapshot);
+        console.log("snapshot here" + snapshot.val());
+
+        console.log(snapshot.val().restaurant);
     
         var restaurant = snapshot.val().restaurant;
     		var restaurantAddress = snapshot.val().restaurantAddress;
