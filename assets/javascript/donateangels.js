@@ -20,14 +20,16 @@ $(document).ready(function() {
 
     var userId = firebase.auth().currentUser.uid;
 
-  return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-  var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-  // ...
-});
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          userId = firebase.auth().currentUser.uid;
+        } else {
+          console.log("No user is signed in");
+        }
+    });
 
-    console.log("This is the current user: " + user);
-
-    console.log("setup page? " + username, useremail, useruid);
+    console.log("This is the current user: " + userId);
 
   	// var email = "clarkwmcd@gmail.com";
 
