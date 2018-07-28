@@ -208,15 +208,17 @@ $(document).ready(function() {
      });
 
 
-  	   database.ref("users/" + userId).on("value", function(Snapshot) {
+  	   database.ref("users/" + userId).on("value", function(snapshot) {
+
+        console.log("snapshot here" + snapshot);
     
-        var restaurant = Snapshot.val().restaurant;
-    		var restaurantAddress = Snapshot.val().restaurantAddress;
-    		var donateFood = Snapshot.val().donateFood;
-    		var menuNumber = Snapshot.val().menuNumber;
-    		var value = Snapshot.val().value;
-    		var pickUp = Snapshot.val().pickUp;
-        var userId = Snapshot.val().user;
+        var restaurant = snapshot.val().restaurant;
+    		var restaurantAddress = snapshot.val().restaurantAddress;
+    		var donateFood = snapshot.val().donateFood;
+    		var menuNumber = snapshot.val().menuNumber;
+    		var value = snapshot.val().value;
+    		var pickUp = snapshot.val().pickUp;
+        var userId = snapshot.val().user;
 
     		var donationTable = $("#donationTable");
     		donationTable.append("<tr><th>"+ restaurant +"</th><th>" + restaurantAddress +"</th><th>"+ donateFood +"</th><th>"+ menuNumber + "</th><th>"+ pickUp + "</th><th><p><input type='checkbox' class='filled-in happy' id='"+ userId +"'/><label for='"+ userId + "'></label></p></tr>");
