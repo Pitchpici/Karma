@@ -263,7 +263,7 @@ $(document).ready(function() {
 
         console.log(snapshot.val().restaurant);
 
-        if (snapshot.val().menuNumber == null) {
+        if (snapshot.val().menuNumber !== null) {
     
             var restaurant = snapshot.val().restaurant;
         		var restaurantAddress = snapshot.val().restaurantAddress;
