@@ -34,10 +34,16 @@ $(document).ready(function() {
           userId = firebase.auth().currentUser.uid;
           console.log("This is the user id: " + userId);
 
+          userEmail = firebase.auth().currentUser.email;
+          console.log("This is the user email" + userEmail);
+
 
 
   	// var email = "clarkwmcd@gmail.com";
 
+
+//SUBMIT PAGE
+    
 
     $("#submitBtn").on("click", function(event) {
 
@@ -65,28 +71,47 @@ $(document).ready(function() {
         };
 
 
-      var userEmail = "jojoenos@gmail.com";
-      var donationType = $("#donateFood").val().trim();
-      var numPeople = $("#menuNumber").val().trim();
-      var donationValue = $("#value").val().trim();
-      var pickUpTime = $("#pickUp").val().trim();
+      // var userEmail = "jojoenos@gmail.com";
+      // var donationType = $("#donateFood").val().trim();
+      // var numPeople = $("#menuNumber").val().trim();
+      // var donationValue = $("#value").val().trim();
+      // var pickUpTime = $("#pickUp").val().trim();
 
-      function donatorEmail() {
+
+//MailGun API config
+      function donatorEmail(donateFood, menuNumber, value, pickUp) {
         var queryURL = "https://api.mailgun.net/v3/";
-        var hdrVal = "Basic " + btoa("api:key-ef72536d6301ae8ec42279773af8eaf9");
-        var userEmail = "jojoenos@gmail.com";
+        var hdrVal = "Basic " + btoa("key-3cc8d12f860ed426a1731d7c67e56c4a");
+        // var userEmail = "jojoenos@gmail.com";
+
+        var baseUrl = "https://api.mailgun.net/v3/sandboxfdbe5a70fece4951b5aaa822e99fe7cc.mailgun.org";
+        var myDomain = "sandboxfdbe5a70fece4951b5aaa822e99fe7cc.mailgun.org";
+
+
+
       
-        var donationType = $("#donateFood").val().trim();
+        // var donationType = $("#donateFood").val().trim();
       
       
-        var text = `<p>Thank you so much for your generous donation.</p> <p>Your benevolence is appreciated and you will reap the karmic rewards of that. </p>  <p>This is to confirm that you have offered this to the community today: <ul> </p> <p> <li> Donation: `+ donationType +` </li> </p> <p> <li> Approximate value:  `+ donationValue + `</li> </p> <li> For number of people: `+ numPeople +` </li> <p> <li> Pick up time: `+ pickUpTime +` </li> </ul> </p>  <p>You will receive an email if an organization in need will be able to benefit from this donation. </p> <p>Thank you again for your KarmaFoodBank charity! </p> <p style='text-align:center'>— KarmaFoodBank </p>`
+        var text = `<p>Thank you so much for your generous donation.</p> 
+          <p>Your benevolence is appreciated and you will reap the karmic rewards of that.</p>  
+          <p>This is to confirm that you have offered this to the community today: </p> 
+            <ul> 
+              <li> Donation: ${donateFood} </li> 
+              <li> Approximate value:  ${value} </li> 
+              <li> For number of people: ${menuNumber} </li> 
+              <li> Pick up time: ${pickUp} </li> 
+            </ul>  
+          <p>You will receive an email if an organization in need will be able to benefit from this donation. </p>
+          <p>Thank you again for your KarmaFoodBank charity!</p> 
+          <p style="text-align:center"> — KarmaFoodBank </p>`
 
           $.ajax({
-            url: "https://us-central1-empower-hope.cloudfunctions.net/api/mailgun-api/sandboxc502a7a2dae748469de9804c3742317f.mailgun.org/messages",
+            url: "https://api.mailgun.net/v3/sandboxfdbe5a70fece4951b5aaa822e99fe7cc.mailgun.org",
             method: "POST",
             headers: {"Authorization": hdrVal},
             data: {
-              from: "jojoenos@gmail.com",
+              from: "roxanamilea@ymail.com",
               to: userEmail,
               subject: "Hello from KarmaFoodBank",
               html: text
@@ -100,7 +125,9 @@ $(document).ready(function() {
 
         }
 
-        donatorEmail(); 
+        donatorEmail();
+
+//empty fields        
 
         $("#donateFood").val("");
         $("#menuNumber").val("");
@@ -110,13 +137,13 @@ $(document).ready(function() {
       }
 
 
-  		database.ref("/users/" + userId + "/profile").update(temp);
+  		database.ref("/users/" + userId).push(temp);
 
 
     });
 
 
-
+//DONATE PAGE
 
     $("#btnHappy").on("click", function(event) {
 
@@ -125,7 +152,7 @@ $(document).ready(function() {
           
          emailArray = [];      
 
-         $(".happy").each(function (index, element) {
+         $(".happy").each(function(index, element) {
 
 
            if (element.checked) {
