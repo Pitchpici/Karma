@@ -35,7 +35,7 @@ $(document).ready(function() {
           console.log("This is the user id: " + userId);
 
           userEmail = firebase.auth().currentUser.email;
-          console.log("This is the user email" + userEmail);
+          console.log("This is the user email: " + userEmail);
 
 
 
