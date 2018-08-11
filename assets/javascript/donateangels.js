@@ -139,7 +139,8 @@ firebase.auth().onAuthStateChanged(function(user) {
       database.ref("/donations").push(temp);
 
 
-    });
+
+    // });
 
   	   database.ref("donations/").on("value", function(snapshot) {
 
@@ -186,6 +187,8 @@ firebase.auth().onAuthStateChanged(function(user) {
           donationTable.append(donationRow);
 
         });
+
+      });
 
 
     	}, function(errorObject) {
