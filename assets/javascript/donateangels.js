@@ -214,7 +214,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
              console.log("This is the checked element: " + element);
 
-            $(this).parents("tr").remove();
+            $(this).parents("tbody").remove();
 
              key = $(this).attr("id");
 
