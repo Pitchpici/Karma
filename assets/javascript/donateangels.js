@@ -222,22 +222,25 @@ firebase.auth().onAuthStateChanged(function(user) {
 
              database.ref(`donations/-${key}`).remove();
 
-             database.ref("users/" + userId + "/profile").once('value').then(function(snapshot) {
-                
-               var donorEmail = snapshot.val().email;
-               console.log(donorEmail);
+//this triggers the bug in the angels table - -----------
 
-               emailArray.push(donorEmail);
-               console.log(emailArray);
+                   database.ref("users/" + userId + "/profile").once('value').then(function(snapshot) {
+                      
+                     var donorEmail = snapshot.val().email;
+                     console.log("This is the donor email: " + donorEmail);
 
-               return emailArray;
-             });
+                     emailArray.push(donorEmail);
+                     console.log(emailArray);
+
+                     return emailArray;
+                   });
              
 
            } 
 
                console.log('outerspace' + emailArray);
            });// close button happy
+
 
       console.log("key" + key);   
 
