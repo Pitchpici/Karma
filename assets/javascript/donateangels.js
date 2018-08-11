@@ -291,6 +291,9 @@ $(document).ready(function() {
 
         console.log("Donate Food value: " + snapshot.val().donateFood);
 
+        // var donationTable = $("#donationTable");
+
+
         snapshot.forEach(function(childSnapshot) {
           console.log("aaa " + childSnapshot.val().donateFood); //this is working now
           console.log("id of childsnapshot " + childSnapshot.val().userId);
@@ -319,6 +322,7 @@ $(document).ready(function() {
 
               })
           })
+          
           donationTable.append(donationRow);
 
         });
@@ -334,7 +338,7 @@ $(document).ready(function() {
         		var pickUp = snapshot.val().pickUp;
             var userId = snapshot.val().user;
 
-        		var donationTable = $("#donationTable");
+        		// var donationTable = $("#donationTable");
 
         		donationTable.append("<tr><th>"+ restaurant +"</th><th>" + restaurantAddress +"</th><th>"+ donateFood +"</th><th>"+ 
               menuNumber + "</th><th>"+ pickUp + "</th><th><p><input type='checkbox' class='filled-in happy' id='"+ userId +
