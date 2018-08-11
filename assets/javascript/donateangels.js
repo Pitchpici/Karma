@@ -300,7 +300,7 @@ $(document).ready(function() {
 
           var tempId = childSnapshot.val().userId;
           var key = childSnapshot.key.substr(1);
-          console.log("here's the key: " + childSnapshot.key);
+          console.log("here's the key: " + key);
 
           var donationRow = $("<tr>");
           var foodType = $("<th>").text(childSnapshot.val().donateFood);
