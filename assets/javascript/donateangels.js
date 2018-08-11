@@ -289,7 +289,7 @@ $(document).ready(function() {
 
         console.log("snapshot here: " + snapshot.val());
 
-        console.log(snapshot.val().restaurant);
+        console.log("Donate Food value: " + snapshot.val().donateFood);
 
         if ((snapshot.val().menuNumber !== undefined) && (snapshot.val().pickUp !== null)) {
     
