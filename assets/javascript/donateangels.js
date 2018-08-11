@@ -292,7 +292,19 @@ $(document).ready(function() {
         console.log("Donate Food value: " + snapshot.val().donateFood);
 
         snapshot.forEach(function(childSnapshot) {
-          console.log("aaa " + childSnapshot.val().donateFood);
+          console.log("aaa " + childSnapshot.val().donateFood); //this is working now
+          console.log("id of childsnapshot " + childSnapshot.val().userId);
+
+          var tempId = childSnapshot.val().userId;
+
+
+          database.ref("users/" + childSnapshot.val().userId).on("value", function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              if (childSnapshot.val().user == tempId) {
+                console.log("This is the profile info " + childSnapshot.val().restaurantAddress);
+              } 
+            })
+          })
         });
 
 
