@@ -304,8 +304,10 @@ $(document).ready(function() {
           var foodType = $("<th>").text(childSnapshot.val().donateFood);
           var menuNumbers = $("<th>").text(childSnapshot.val().menuNumber);
           var time = $("<th>").text(childSnapshot.val().pickUp);
+          var checkbox = $("<th>").html(`<input type='checkbox' class='filled-in happy' id='" + ${tempId} +
+              "'/><label for='" + ${tempId} + "'></label>`);
 
-          donationRow.append(foodType).append(menuNumbers).append(time);
+          donationRow.append(foodType).append(menuNumbers).append(time).append(checkbox);
 
 
           database.ref("users/" + tempId).on("value", function(snapshot) {
@@ -322,7 +324,7 @@ $(document).ready(function() {
 
               })
           })
-          
+
           donationTable.append(donationRow);
 
         });
