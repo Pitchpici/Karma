@@ -299,13 +299,15 @@ $(document).ready(function() {
           console.log("id of childsnapshot " + childSnapshot.val().userId);
 
           var tempId = childSnapshot.val().userId;
+          var key = childSnapshot.key;
+          console.log("here's the key: " + childSnapshot.key);
 
           var donationRow = $("<tr>");
           var foodType = $("<th>").text(childSnapshot.val().donateFood);
           var menuNumbers = $("<th>").text(childSnapshot.val().menuNumber);
           var time = $("<th>").text(childSnapshot.val().pickUp);
-          var checkbox = $("<th>").html(`<input type='checkbox' class='filled-in happy' id='" + ${tempId} +
-              "'/><label for='" + ${tempId} + "'></label>`);
+          var checkbox = $("<th>").html(`<input type='checkbox' class='filled-in happy' id='" + ${key} +
+              "'/><label for='" + ${key} + "'></label>`);
 
           donationRow.append(foodType).append(menuNumbers).append(time).append(checkbox);
 
