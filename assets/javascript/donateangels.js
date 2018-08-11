@@ -28,18 +28,16 @@ $(document).ready(function() {
       menuNumber: null
   };
 
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          userId = firebase.auth().currentUser.uid;
-          console.log("This is the user id: " + userId);
 
-          userEmail = firebase.auth().currentUser.email;
-          console.log("This is the user email: " + userEmail);
+firebase.auth().onAuthStateChanged(function(user) {
 
+          if (user) {
+            // User is signed in.
+            userId = firebase.auth().currentUser.uid;
+            console.log("This is the user id: " + userId);
 
-
-  	// var email = "clarkwmcd@gmail.com";
+            userEmail = firebase.auth().currentUser.email;
+            console.log("This is the user email: " + userEmail);
 
 
 //SUBMIT PAGE
@@ -165,6 +163,8 @@ $(document).ready(function() {
              key = $(this).attr("id");
 
              console.log("This is the selected item's key: " + key); //this is the donation unique key
+
+             database.ref(`donations/-${key}`).remove();
 
              database.ref("users/" + userId + "/profile").once('value').then(function(snapshot) {
                 
@@ -332,22 +332,6 @@ $(document).ready(function() {
         });
 
 
-        if ((snapshot.val().menuNumber !== undefined) && (snapshot.val().pickUp !== null)) {
-    
-            var restaurant = snapshot.val().restaurant;
-        		var restaurantAddress = snapshot.val().restaurantAddress;
-        		var donateFood = snapshot.val().donateFood;
-        		var menuNumber = snapshot.val().menuNumber;
-        		var value = snapshot.val().value;
-        		var pickUp = snapshot.val().pickUp;
-            var userId = snapshot.val().user;
-
-        		// var donationTable = $("#donationTable");
-
-        		donationTable.append("<tr><th>"+ restaurant +"</th><th>" + restaurantAddress +"</th><th>"+ donateFood +"</th><th>"+ 
-              menuNumber + "</th><th>"+ pickUp + "</th><th><p><input type='checkbox' class='filled-in happy' id='"+ userId +
-              "'/><label for='"+ userId + "'></label></p></tr>");
-        }
     	}, function(errorObject) {
     		console.log("The read failed: " + errorObject.code);
     	});
