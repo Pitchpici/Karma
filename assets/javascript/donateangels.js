@@ -297,14 +297,30 @@ $(document).ready(function() {
 
           var tempId = childSnapshot.val().userId;
 
+          var donationRow = $("<tr>");
+          var foodType = $("<th>").text(childSnapshot.val().donateFood);
+          var menuNumbers = $("<th>").text(childSnapshot.val().menuNumber);
+          var time = $("<th>").text(childSnapshot.val().pickUp);
 
-          database.ref("users/" + childSnapshot.val().userId).on("value", function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-              if (childSnapshot.val().user == tempId) {
-                console.log("This is the profile info " + childSnapshot.val().restaurantAddress);
-              } 
-            })
+          donationRow.append(foodType).append(menuNumbers).append(time);
+
+
+          database.ref("users/" + tempId).on("value", function(snapshot) {
+           
+              snapshot.forEach(function(childSnapshot) {
+                  if (childSnapshot.val().user == tempId) {
+                    console.log("This is the profile info: " + childSnapshot.val().restaurantAddress);
+
+                    var name = $("<th>").text(childSnapshot.val().restaurant);
+                    var address = $("<th>").text(childSnapshot.val().restaurantAddress);
+
+                    donationRow.prepend(address).prepend(name);
+                  } 
+
+              })
           })
+          donationTable.append(donationRow);
+
         });
 
 
