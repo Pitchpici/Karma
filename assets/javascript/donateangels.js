@@ -67,7 +67,8 @@ $(document).ready(function() {
           donateFood: donateFood,
           menuNumber: menuNumber,
           value: value,
-          pickUp: pickUp
+          pickUp: pickUp,
+          userId: userId
         };
 
 
@@ -124,7 +125,7 @@ $(document).ready(function() {
 
         }
 
-        donatorEmail();
+        donatorEmail(donateFood, menuNumber, value, pickUp);
 
 //empty fields        
 
@@ -137,6 +138,7 @@ $(document).ready(function() {
 
 
   		database.ref("/users/" + userId).push(temp);
+      database.ref("/donations").push(temp);
 
 
     });
