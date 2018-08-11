@@ -84,8 +84,7 @@ $(document).ready(function() {
         var hdrVal = "Basic " + btoa("key-3cc8d12f860ed426a1731d7c67e56c4a");
         // var userEmail = "jojoenos@gmail.com";
 
-        var baseUrl = "https://api.mailgun.net/v3/sandboxfdbe5a70fece4951b5aaa822e99fe7cc.mailgun.org";
-        var myDomain = "sandboxfdbe5a70fece4951b5aaa822e99fe7cc.mailgun.org";
+       
 
 
 
@@ -284,9 +283,9 @@ $(document).ready(function() {
      });
 
 
-  	   database.ref("users/" + userId + "/profile").on("value", function(snapshot) {
+  	   database.ref("users/" + userId).on("value", function(snapshot) {
 
-        console.log("snapshot here" + snapshot.val());
+        console.log("snapshot here: " + snapshot.val());
 
         console.log(snapshot.val().restaurant);
 
