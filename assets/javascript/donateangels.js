@@ -285,7 +285,7 @@ $(document).ready(function() {
      });
 
 
-  	   database.ref("users/" + userId).on("value", function(snapshot) {
+  	   database.ref("donations/").on("value", function(snapshot) {
 
         console.log("snapshot here: " + snapshot.val());
 
