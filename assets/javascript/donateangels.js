@@ -291,6 +291,11 @@ $(document).ready(function() {
 
         console.log("Donate Food value: " + snapshot.val().donateFood);
 
+        snapshot.forEach(function(childSnapshot) {
+          console.log("aaa " + childSnapshot.val().donateFood);
+        });
+
+
         if ((snapshot.val().menuNumber !== undefined) && (snapshot.val().pickUp !== null)) {
     
             var restaurant = snapshot.val().restaurant;
