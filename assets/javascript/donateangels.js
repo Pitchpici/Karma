@@ -141,6 +141,62 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     });
 
+  	   database.ref("donations/").on("value", function(snapshot) {
+
+        console.log("snapshot here: " + snapshot.val());
+
+        console.log("Donate Food value: " + snapshot.val().donateFood);
+
+        // var donationTable = $("#donationTable");
+
+
+        snapshot.forEach(function(childSnapshot) {
+          console.log("aaa " + childSnapshot.val().donateFood); //this is working now
+          console.log("id of childsnapshot " + childSnapshot.val().userId);
+
+          var tempId = childSnapshot.val().userId;
+          var key = childSnapshot.key.substr(1);
+          console.log("here's the key: " + key);
+
+          var donationRow = $("<tr>");
+          var foodType = $("<th>").text(childSnapshot.val().donateFood);
+          var menuNumbers = $("<th>").text(childSnapshot.val().menuNumber);
+          var time = $("<th>").text(childSnapshot.val().pickUp);
+          var checkbox = $("<th>").html(`<p><input type='checkbox' class='filled-in happy' id='${key}'/>
+                                        <label for='${key}'></label></p>`);
+
+          donationRow.append(foodType).append(menuNumbers).append(time).append(checkbox);
+
+
+          database.ref("users/" + tempId).on("value", function(snapshot) {
+           
+              snapshot.forEach(function(childSnapshot) {
+                  if (childSnapshot.val().user == tempId) {
+                    console.log("This is the profile info: " + childSnapshot.val().restaurantAddress);
+
+                    var name = $("<th>").text(childSnapshot.val().restaurant);
+                    var address = $("<th>").text(childSnapshot.val().restaurantAddress);
+
+                    donationRow.prepend(address).prepend(name);
+                  } 
+
+              })
+          })
+
+          donationTable.append(donationRow);
+
+        });
+
+
+    	}, function(errorObject) {
+    		console.log("The read failed: " + errorObject.code);
+    	});
+
+               } else {
+          console.log("No user is signed in");
+        }
+    });    
+
 
 //DONATE PAGE
 
@@ -284,62 +340,6 @@ firebase.auth().onAuthStateChanged(function(user) {
         });
      });
 
-
-  	   database.ref("donations/").on("value", function(snapshot) {
-
-        console.log("snapshot here: " + snapshot.val());
-
-        console.log("Donate Food value: " + snapshot.val().donateFood);
-
-        // var donationTable = $("#donationTable");
-
-
-        snapshot.forEach(function(childSnapshot) {
-          console.log("aaa " + childSnapshot.val().donateFood); //this is working now
-          console.log("id of childsnapshot " + childSnapshot.val().userId);
-
-          var tempId = childSnapshot.val().userId;
-          var key = childSnapshot.key.substr(1);
-          console.log("here's the key: " + key);
-
-          var donationRow = $("<tr>");
-          var foodType = $("<th>").text(childSnapshot.val().donateFood);
-          var menuNumbers = $("<th>").text(childSnapshot.val().menuNumber);
-          var time = $("<th>").text(childSnapshot.val().pickUp);
-          var checkbox = $("<th>").html(`<p><input type='checkbox' class='filled-in happy' id='${key}'/>
-                                        <label for='${key}'></label></p>`);
-
-          donationRow.append(foodType).append(menuNumbers).append(time).append(checkbox);
-
-
-          database.ref("users/" + tempId).on("value", function(snapshot) {
-           
-              snapshot.forEach(function(childSnapshot) {
-                  if (childSnapshot.val().user == tempId) {
-                    console.log("This is the profile info: " + childSnapshot.val().restaurantAddress);
-
-                    var name = $("<th>").text(childSnapshot.val().restaurant);
-                    var address = $("<th>").text(childSnapshot.val().restaurantAddress);
-
-                    donationRow.prepend(address).prepend(name);
-                  } 
-
-              })
-          })
-
-          donationTable.append(donationRow);
-
-        });
-
-
-    	}, function(errorObject) {
-    		console.log("The read failed: " + errorObject.code);
-    	});
-
-               } else {
-          console.log("No user is signed in");
-        }
-    });    
 
 
 
