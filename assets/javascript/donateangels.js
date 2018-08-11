@@ -299,7 +299,7 @@ $(document).ready(function() {
           console.log("id of childsnapshot " + childSnapshot.val().userId);
 
           var tempId = childSnapshot.val().userId;
-          var key = childSnapshot.key;
+          var key = childSnapshot.key.substr(1);
           console.log("here's the key: " + childSnapshot.key);
 
           var donationRow = $("<tr>");
