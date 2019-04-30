@@ -6,7 +6,7 @@ $(document).ready(function() {
   });
 
   function yelpInfo() {
-  
+
     var restaurant = $("#restaurant").val();
     var zipCode = $("#zipCode").val();
     var queryURLSearchYelp = 'https://api.yelp.com/v3/businesses/search';
@@ -30,20 +30,27 @@ $(document).ready(function() {
       yelpObject = response;
 
       $("#yelpInfo").html("");
+
+      //Create Results Table
+      var restaurantTable = $("<table>").addClass("striped responsive-table centered");
+      var tableHead = $("<thead><th>Name</th><th>Address</th><th>Options</th></thead>");
+      restaurantTable.append(tableHead);
+
+      var restaurantBody = $("<tbody>");
       $.each(response.businesses, function(index, item) {
-    
+        var restaurantRow = $("<tr>");
+
         var organizationYelpAddress = item.location.address1 + ", " + item.location.city + ", " +
             item.location.city + " " + item.location.state + " " + item.location.zip_code;
 
+        var organizationYelpList = $(`<td> ${item.name}</td> <td> ${organizationYelpAddress}</td> <td> <button class="selectName" >Select</button></td>`);
 
-        var organizationYelpList = $('<div>' + item.name + ' Location: ' + item.location.address1 + ' '
-           + item.location.city + " " + item.location.state + " " + item.location.zip_code +
-           '<button type="button" class="selectName" data-name="'+ item.name + '" data-address="' + organizationYelpAddress +
-           '"">Submit</button></div>');
-
-
-        $("#yelpInfo").append(organizationYelpList);
+        restaurantRow.append(organizationYelpList);
+        restaurantBody.append(restaurantRow);
       });
+      
+        restaurantTable.append(restaurantBody);
+        $("#yelpInfo").append(restaurantTable);
     });
   };
 
@@ -55,7 +62,7 @@ $(document).ready(function() {
 
     var user = firebase.auth().currentUser.uid;
     var email = firebase.auth().currentUser.email;
- 
+
     var profile = {
       user: user,
       email: email,
@@ -63,7 +70,7 @@ $(document).ready(function() {
       restaurantAddress: selectedDonor.data('address')
     };
 
-  
+
     firebase.database().ref("/users/" + user + "/profile").set(profile).then(function(){
         location.href="Donate.html";
     });;
