@@ -126,7 +126,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         $("#pickUp").val("");
       }
 
-  		database.ref("/users/" + userId).push(temp);
+  		database.ref("/donations/" + userId).push(temp);
       database.ref("/donations").push(temp);
 
     });
