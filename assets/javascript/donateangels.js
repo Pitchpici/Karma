@@ -127,7 +127,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       }
 
   		database.ref("/donations/" + userId).push(temp);
-      database.ref("/donations").push(temp);
+      //database.ref("/donations").push(temp);
 
     });
 
