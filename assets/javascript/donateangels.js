@@ -23,7 +23,7 @@ $(document).ready(function() {
 
     var obj = {
       donateFood: null,
-      value: null, 
+      value: null,
       pickUp: null,
       menuNumber: null
   };
@@ -41,18 +41,17 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
 //SUBMIT PAGE
-    
+
 
     $("#submitBtn").on("click", function(event) {
-
       event.preventDefault();
 
       console.log("submit working");
 
       if (($("#donateFood").val() == "") || ($("#menuNumber").val() == "") || ($("#value").val() == "") || ($("#pickUp").val() == "")) {
 
-        $('#modal1').modal(); 
-        $('#modal1').modal('open'); 
+        $('#modal1').modal();
+        $('#modal1').modal('open');
 
       } else {
 
@@ -79,75 +78,64 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 //MailGun API config
       function donatorEmail(donateFood, menuNumber, value, pickUp) {
-        var queryURL = "https://api.mailgun.net/v3/";
-        var hdrVal = "Basic " + btoa("key-3cc8d12f860ed426a1731d7c67e56c4a");
-        // var userEmail = "jojoenos@gmail.com";
+          var queryURL = "https://api.mailgun.net/v3/";
+          var hdrVal = "Basic " + btoa("key-3cc8d12f860ed426a1731d7c67e56c4a");
+          // var userEmail = "jojoenos@gmail.com";
 
-       
+          // var donationType = $("#donateFood").val().trim();
 
 
+          var text = `<p>Thank you so much for your generous donation.</p>
+            <p>Your benevolence is appreciated and you will reap the karmic rewards of that.</p>
+            <p>This is to confirm that you have offered this to the community today: </p>
+              <ul>
+                <li> Donation: ${donateFood} </li>
+                <li> Approximate value:  ${value} </li>
+                <li> For number of people: ${menuNumber} </li>
+                <li> Pick up time: ${pickUp} </li>
+              </ul>
+            <p>You will receive an email if an organization in need will be able to benefit from this donation. </p>
+            <p>Thank you again for your KarmaFoodBank charity!</p>
+            <p style="text-align:center"> — KarmaFoodBank </p>`
 
-      
-        // var donationType = $("#donateFood").val().trim();
-      
-      
-        var text = `<p>Thank you so much for your generous donation.</p> 
-          <p>Your benevolence is appreciated and you will reap the karmic rewards of that.</p>  
-          <p>This is to confirm that you have offered this to the community today: </p> 
-            <ul> 
-              <li> Donation: ${donateFood} </li> 
-              <li> Approximate value:  ${value} </li> 
-              <li> For number of people: ${menuNumber} </li> 
-              <li> Pick up time: ${pickUp} </li> 
-            </ul>  
-          <p>You will receive an email if an organization in need will be able to benefit from this donation. </p>
-          <p>Thank you again for your KarmaFoodBank charity!</p> 
-          <p style="text-align:center"> — KarmaFoodBank </p>`
+            $.ajax({
+              url: "https://api.mailgun.net/v3/sandboxfdbe5a70fece4951b5aaa822e99fe7cc.mailgun.org",
+              method: "POST",
+              headers: {"Authorization": hdrVal},
+              data: {
+                from: "roxanamilea@ymail.com",
+                to: userEmail,
+                subject: "Hello from KarmaFoodBank",
+                html: text
 
-          $.ajax({
-            url: "https://api.mailgun.net/v3/sandboxfdbe5a70fece4951b5aaa822e99fe7cc.mailgun.org",
-            method: "POST",
-            headers: {"Authorization": hdrVal},
-            data: {
-              from: "roxanamilea@ymail.com",
-              to: userEmail,
-              subject: "Hello from KarmaFoodBank",
-              html: text
+                },
 
-              },
-
-            }).then(function(response){
-               console.log(response);
-               console.log(userEmail);
-            });
+              }).then(function(response){
+                 console.log(response);
+                 console.log(userEmail);
+              });
 
         }
 
         donatorEmail(donateFood, menuNumber, value, pickUp);
 
-//empty fields        
-
+//empty fields
         $("#donateFood").val("");
         $("#menuNumber").val("");
         $("#value").val("");
         $("#pickUp").val("");
-
       }
-
 
   		database.ref("/users/" + userId).push(temp);
       database.ref("/donations").push(temp);
-
 
     });
 
   	   database.ref("donations/").on("value", function(snapshot) {
 
-        console.log("snapshot here: " + snapshot.val());
-
-        console.log("Donate Food value: " + snapshot.val().donateFood);
-
-        // var donationTable = $("#donationTable");
+          console.log("snapshot here: " + snapshot.val());
+          console.log("Donate Food value: " + snapshot.val().donateFood);
+          // var donationTable = $("#donationTable");
 
 
         snapshot.forEach(function(childSnapshot) {
@@ -169,7 +157,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
           database.ref("users/" + tempId).on("value", function(snapshot) {
-           
+
               snapshot.forEach(function(childSnapshot) {
                   if (childSnapshot.val().user == tempId) {
                     console.log("This is the profile info: " + childSnapshot.val().restaurantAddress);
@@ -178,7 +166,7 @@ firebase.auth().onAuthStateChanged(function(user) {
                     var address = $("<th>").text(childSnapshot.val().restaurantAddress);
 
                     donationRow.prepend(address).prepend(name);
-                  } 
+                  }
 
               })
           })
@@ -195,7 +183,7 @@ firebase.auth().onAuthStateChanged(function(user) {
                } else {
           console.log("No user is signed in");
         }
-    });    
+    });
 
 
 //DONATE PAGE
@@ -204,8 +192,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
       event.preventDefault();
 
-          
-         emailArray = [];      
+
+         emailArray = [];
 
          $(".happy").each(function(index, element) {
 
@@ -225,7 +213,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 //this triggers the bug in the angels table - -----------
 
                    database.ref("users/" + userId + "/profile").once('value').then(function(snapshot) {
-                      
+
                      var donorEmail = snapshot.val().email;
                      console.log("This is the donor email: " + donorEmail);
 
@@ -234,23 +222,23 @@ firebase.auth().onAuthStateChanged(function(user) {
 
                      return emailArray;
                    });
-             
 
-           } 
+
+           }
 
                console.log('outerspace' + emailArray);
            });// close button happy
 
 
-      console.log("key" + key);   
+      console.log("key" + key);
 
-       database.ref("users/" + key + "/profile").update(obj); 
+       database.ref("users/" + key + "/profile").update(obj);
 
       $("#donation").on("click",function(event) {
           if ($("#filled-in-box").is(":checked")) {
 
 
-            
+
             console.log("Donation ready for pick up!");
             function receiverEmail() {
               var queryURL = "https://api.mailgun.net/v3/";
@@ -258,7 +246,7 @@ firebase.auth().onAuthStateChanged(function(user) {
               var donationType = $("#donateFood").text();
               var pickUpTime = $("#pickUpTime").text();
               var numOfItems = $("#number").text();
-            
+
               var userEmail = "jojoenos@gmail.com";
 
               var text = `<p>This is to confirm that you have agreed to pick up this donation today: </p> <ul> <p> <li> Donation: `+ donationType +` </li> </p> <p> <li> Number of items: `+ numOfItems +` </li> </p> <p> <li> Pick up time: `+ pickUpTime +` </li> </p> <p>Thank you so much for your KarmaFoodBank charity! </p> <p style="text-align:center;">— KarmaFoodBank </p>`
@@ -280,7 +268,7 @@ firebase.auth().onAuthStateChanged(function(user) {
                 });
               }
 
-            receiverEmail(); 
+            receiverEmail();
 
             function donatorAcceptedEmail() {
               var queryURL = "https://api.mailgun.net/v3/";
@@ -293,7 +281,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
               console.log("This is the user email?" + userEmail);
 
-        
+
               $.ajax({
                 url: "https://us-central1-empower-hope.cloudfunctions.net/api/mailgun-api/sandboxc502a7a2dae748469de9804c3742317f.mailgun.org/messages",
                 method: "POST",
@@ -313,8 +301,8 @@ firebase.auth().onAuthStateChanged(function(user) {
             donatorAcceptedEmail()
 
           } else {
-            var checkCheckBox = "Please select at least one checkbox." 
-          
+            var checkCheckBox = "Please select at least one checkbox."
+
             $("#filled-in-box").validate({
               rules: {
                 check: {
@@ -347,5 +335,3 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
 });
-
-
