@@ -48,17 +48,17 @@ $(document).ready(function() {
         restaurantRow.append(organizationYelpList);
         restaurantBody.append(restaurantRow);
       });
-      
+
         restaurantTable.append(restaurantBody);
         $("#yelpInfo").append(restaurantTable);
     });
   };
 
   $(document).on("click", ".selectName", function(event) {
-
-    var selectedDonor = $(this);
-
     event.preventDefault();
+
+    var selectedDonorName = $(this).closest("tr").find("td:nth-child(1)").text();
+    var selectedDonorAddress = $(this).closest("tr").find("td:nth-child(2)").text();
 
     var user = firebase.auth().currentUser.uid;
     var email = firebase.auth().currentUser.email;
@@ -66,8 +66,8 @@ $(document).ready(function() {
     var profile = {
       user: user,
       email: email,
-      restaurant: selectedDonor.data('name'),
-      restaurantAddress: selectedDonor.data('address')
+      restaurant: selectedDonorName,
+      restaurantAddress: selectedDonorAddress
     };
 
 
