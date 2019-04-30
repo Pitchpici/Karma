@@ -71,7 +71,7 @@ $(document).ready(function() {
     };
 
 
-    firebase.database().ref("/users/" + user + "/profile").set(profile).then(function(){
+    firebase.database().ref("/users/" + selectedDonorName).set(profile).then(function(){
         location.href="Donate.html";
     });;
 
