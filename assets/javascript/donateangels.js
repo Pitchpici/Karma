@@ -131,7 +131,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     });
 
-  	   database.ref("donations/"+ userId).on("value", function(snapshot) {
+  	   database.ref("/donations").on("value", function(snapshot) {
 
           console.log("snapshot here: " + JSON.stringify(snapshot.val()));
           console.log("Donate Food value: " + snapshot.val().donateFood);
