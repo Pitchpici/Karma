@@ -131,7 +131,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     });
 
-  	   database.ref("/donations").on("value", function(snapshot) {
+  	   database.ref("/donations"+ userId).on("value", function(snapshot) {
 
           console.log("snapshot here: " + JSON.stringify(snapshot.val()));
           console.log("Donate Food value: " + snapshot.val().donateFood);
@@ -139,7 +139,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
         snapshot.forEach(function(childSnapshot) {
-          console.log("aaa " + childSnapshot.val().donateFood); //this is working now
+          console.log("aaa =====>  " + childSnapshot.val()); //this is working now
           console.log("id of childsnapshot " + childSnapshot.val().userId);
 
           var tempId = childSnapshot.val().userId;
